@@ -9,37 +9,38 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <main class="feedback-page" style="min-height: 100vh; display: flex; align-items: center; padding: 40px 0; background: var(--off-white);">
+<body style="background: var(--off-white);">
+
+    <main class="section" style="min-height: 100vh; display:flex; align-items:center; padding: 40px 0;">
         <div class="container">
-            <div class="feedback-card-container" style="max-width: 650px; margin: 0 auto; background: var(--white); padding: 40px; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); border: 1px solid var(--border);">
-                <a href="index.html#information" class="back-link" style="display:inline-flex; align-items:center; gap:6px; font-size:0.8rem; font-weight:700; color:var(--blue-accent); margin-bottom:20px;">← Kembali ke Beranda</a>
+            <div style="max-width: 600px; margin: 0 auto; background: var(--white); padding: 35px; border-radius: var(--radius-lg); border: 1px solid var(--border); box-shadow: var(--shadow-lg);">
+                <a href="index.html" class="text-link" style="margin-bottom: 20px; display:inline-block;">← Kembali ke Beranda</a>
                 
-                <div class="form-header" style="margin-bottom: 24px;">
-                    <span style="font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; color: var(--blue-accent); text-transform: uppercase;">CUSTOMER CARE</span>
-                    <h2 style="font-size: 1.8rem; margin-top: 4px;">Feedback & Complaint</h2>
-                    <p style="color: var(--text-light); font-size: 0.9rem; margin-top: 6px;">Pengalaman dan masukan Anda sangat berharga untuk meningkatkan kualitas pelayanan Institut Medika Nusantara.</p>
+                <div class="form-header">
+                    <span style="font-size:0.7rem; font-weight:700; color:var(--blue-accent); text-transform:uppercase;">CUSTOMER CARE</span>
+                    <h2 style="font-family:'Playfair Display',serif; font-size:1.8rem; color:var(--navy-dark); margin-top:4px;">Feedback & Complaint</h2>
+                    <p style="color:var(--text-light); font-size:0.85rem; margin-top:6px;">Masukan Anda sangat berharga untuk terus meningkatkan kualitas pelayanan Institut Medika Nusantara.</p>
                 </div>
 
-                <form id="feedbackForm">
-                    <div class="form-group" style="margin-bottom: 16px;">
-                        <label style="display:block; font-size:0.75rem; font-weight:700; margin-bottom:6px;">Nama Pasien / Pengunjung</label>
-                        <input type="text" id="clientName" placeholder="Masukkan nama lengkap" style="width:100%; padding:12px 14px; border:1px solid var(--border); border-radius:8px; background:var(--off-white);" required>
+                <form id="feedbackForm" style="margin-top:20px;">
+                    <div class="form-group">
+                        <label>Nama Pasien / Pengunjung</label>
+                        <input type="text" id="clientName" placeholder="Masukkan nama lengkap Anda" required>
                     </div>
 
-                    <div class="form-row" style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-bottom:16px;">
+                    <div class="form-row">
                         <div class="form-group">
-                            <label style="display:block; font-size:0.75rem; font-weight:700; margin-bottom:6px;">Jenis Pesan</label>
-                            <select id="feedbackType" required style="width:100%; padding:12px 14px; border:1px solid var(--border); border-radius:8px; background:var(--off-white);">
+                            <label>Jenis Pesan</label>
+                            <select id="feedbackType" required>
                                 <option value="Pujian / Apresiasi">Pujian / Apresiasi</option>
                                 <option value="Saran / Masukan">Saran / Masukan</option>
                                 <option value="Keluhan / Complaint">Keluhan / Complaint</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label style="display:block; font-size:0.75rem; font-weight:700; margin-bottom:6px;">Kategori Layanan</label>
-                            <select id="category" required style="width:100%; padding:12px 14px; border:1px solid var(--border); border-radius:8px; background:var(--off-white);">
-                                <option value="Pelayanan Pendaftaran / Adm">Pelayanan Pendaftaran / Adm</option>
+                            <label>Kategori Layanan</label>
+                            <select id="category" required>
+                                <option value="Pelayanan Pendaftaran / Adm">Pelayanan Adm</option>
                                 <option value="Poli & Tenaga Medis">Poli & Tenaga Medis</option>
                                 <option value="Fasilitas / Ruangan">Fasilitas / Ruangan</option>
                                 <option value="Lainnya">Lainnya</option>
@@ -47,16 +48,34 @@
                         </div>
                     </div>
 
-                    <div class="form-group" style="margin-bottom: 20px;">
-                        <label style="display:block; font-size:0.75rem; font-weight:700; margin-bottom:6px;">Uraian Pengalaman / Pesan</label>
-                        <textarea id="messageDetail" rows="4" placeholder="Ceritakan pengalaman atau masukan Anda..." required style="width:100%; padding:12px 14px; border:1px solid var(--border); border-radius:8px; background:var(--off-white);"></textarea>
+                    <div class="form-group">
+                        <label>Uraian Pesan / Pengalaman</label>
+                        <textarea id="messageDetail" rows="4" placeholder="Ceritakan pengalaman Anda..." required></textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Kirim ke WhatsApp IMN & Wall of Appreciation →</button>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top:10px;">Kirimkan Feedback →</button>
                 </form>
             </div>
         </div>
     </main>
+
+    <!-- MODAL APRESIASI SUKSES (GAMBAR 2 REVISI) -->
+    <div id="successModal" class="modal-overlay" style="display: none;">
+        <div class="modal-card">
+            <div class="modal-icon">💚</div>
+            <h3 style="font-family:'Playfair Display',serif; color:var(--navy-dark); font-size:1.4rem; margin-bottom:10px;">Apresiasi Berhasil Terupload!</h3>
+            <p style="color:var(--text-light); font-size:0.9rem; line-height:1.6; margin-bottom:15px;">
+                Terima kasih banyak telah menggunakan jasa medis dari <strong>Institut Medika Nusantara (IMN)</strong>. Harapan kami, Anda selalu sehat dan dapat terus mengandalkan IMN di masa mendatang.
+            </p>
+            <p style="color:var(--text-light); font-size:0.85rem; font-style:italic; margin-bottom:20px; background:var(--off-white); padding:10px; border-radius:8px;">
+                "Kami juga sangat terbuka apabila Anda memiliki kritikan membangun jika terdapat hal-hal yang kurang mengenakkan demi pelayanan yang lebih baik."
+            </p>
+            <div style="display:flex; flex-direction:column; gap:10px;">
+                <a id="waDirectBtn" href="#" class="btn btn-primary" style="font-size:0.85rem;">Teruskan ke WhatsApp IMN</a>
+                <a href="index.html" class="btn btn-outline" style="font-size:0.85rem;">Kembali ke Menu Utama</a>
+            </div>
+        </div>
+    </div>
 
     <script>
         document.getElementById('feedbackForm').addEventListener('submit', function(e) {
@@ -74,14 +93,11 @@
             }
 
             const whatsappNumber = "6289673320727"; 
-            const text = `💬 *FEEDBACK & COMPLAINT IMN*\n\n` +
-                         `• *Nama*: ${name}\n` +
-                         `• *Jenis*: ${type}\n` +
-                         `• *Kategori*: ${category}\n` +
-                         `• *Pesan/Uraian*:\n${detail}\n\n` +
-                         `_Dikirim melalui Halaman Feedback Resmi Institut Medika Nusantara_`;
+            const textMsg = `*FEEDBACK IMN*\nNama: ${name}\nJenis: ${type}\nKategori: ${category}\nPesan: ${detail}`;
+            const waUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(textMsg)}`;
 
-            window.location.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+            document.getElementById('waDirectBtn').href = waUrl;
+            document.getElementById('successModal').style.display = 'flex';
         });
     </script>
 </body>
