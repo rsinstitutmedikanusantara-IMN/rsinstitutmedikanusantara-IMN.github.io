@@ -57,7 +57,7 @@
     <main>
 
         <!-- =========================
-             HERO SECTION (BERANDA) - FOTO GEDUNG TANPA NAMA
+             HERO SECTION (BERANDA)
         ========================== -->
         <section id="home" class="hero-fullscreen">
             <div class="container hero-container">
@@ -96,7 +96,7 @@
                     </div>
                 </div>
 
-                <!-- HERO VISUAL: FOTO ARSITEKTUR GEDUNG MEDIS NETRAL (TANPA TULISAN/NAMA) -->
+                <!-- HERO VISUAL: FOTO ARSITEKTUR GEDUNG MEDIS NETRAL -->
                 <div class="hero-visual">
                     <div class="hero-image-wrapper">
                         <img src="https://images.unsplash.com/photo-1629909615184-74f495363b67?q=80&w=1200&auto=format&fit=crop" alt="Gedung Rumah Sakit Modern" class="hero-image">
@@ -189,9 +189,10 @@
                         Institut Medika Nusantara merupakan institusi pelayanan kesehatan yang berkomitmen menghadirkan pelayanan medis berkualitas melalui perpaduan tenaga profesional, fasilitas kesehatan modern, serta pendekatan pelayanan yang mengutamakan kenyamanan dan kebutuhan setiap pasien.
                     </p>
                     <p>
-                        Dengan mengusung konsep <strong>Premium Healthcare</strong>, Institut Medika Nusantara menyediakan berbagai layanan kesehatan yang dirancang untuk memberikan pengalaman pelayanan yang aman, nyaman, profesional, dan penuh kepedulian.
+                        Didirikan pada 04 November 2026 oleh Mrs. S dan Ms. F, kami berkomitmen menghadirkan pelayanan virtual yang terarah, profesional, terstruktur, dan penuh kepedulian.
                     </p>
-                    <a href="#information" class="text-link">Mengenal IMN lebih lanjut →</a>
+                    <!-- Tautan Mengarah ke about.html -->
+                    <a href="about.html" class="text-link">Mengenal IMN lebih lanjut →</a>
                 </div>
             </div>
         </section>
@@ -221,16 +222,16 @@
                     <article class="service-card">
                         <span class="service-number">02</span>
                         <div class="service-icon">◉</div>
-                        <h3>Poli Anak</h3>
-                        <p>Pelayanan kesehatan yang berfokus pada kebutuhan kesehatan anak.</p>
+                        <h3>Poli Obgyn</h3>
+                        <p>Pelayanan kesehatan kandungan, testpack, USG, hingga persalinan.</p>
                         <a href="#appointment" class="service-link">Lihat layanan →</a>
                     </article>
 
                     <article class="service-card">
                         <span class="service-number">03</span>
                         <div class="service-icon">♡</div>
-                        <h3>Poli Kandungan</h3>
-                        <p>Pelayanan kesehatan ibu dan kandungan bersama tenaga profesional.</p>
+                        <h3>Poli Anak</h3>
+                        <p>Pelayanan imunisasi, tumbuh kembang, dan kesehatan anak.</p>
                         <a href="#appointment" class="service-link">Lihat layanan →</a>
                     </article>
 
@@ -238,7 +239,7 @@
                         <span class="service-number">04</span>
                         <div class="service-icon">◌</div>
                         <h3>Poli Jiwa</h3>
-                        <p>Pelayanan kesehatan mental dengan pendekatan yang aman dan suportif.</p>
+                        <p>Pelayanan konsultasi kesehatan mental dengan pendekatan suportif.</p>
                         <a href="#appointment" class="service-link">Lihat layanan →</a>
                     </article>
                 </div>
@@ -353,8 +354,8 @@
                             <select id="service" name="service" required>
                                 <option value="">Pilih layanan</option>
                                 <option value="umum">Poli Umum</option>
+                                <option value="obgyn">Poli Obgyn</option>
                                 <option value="anak">Poli Anak</option>
-                                <option value="kandungan">Poli Kandungan</option>
                                 <option value="jiwa">Poli Jiwa</option>
                             </select>
                         </div>
@@ -378,7 +379,7 @@
         </section>
 
         <!-- =========================
-             INFORMATION (KARTU STATIS TANPA EFEK GERAK SAAT DISENTUH)
+             INFORMATION (KARTU STATIS TANPA EFEK GERAK)
         ========================== -->
         <section id="information" class="section information-section">
             <div class="container">
@@ -389,12 +390,12 @@
                 </div>
 
                 <div class="information-grid reveal">
-                    <!-- KARTU INFORMASI STATIS (CLASS info-card-static) -->
+                    <!-- Tautan Mengarah ke guides.html -->
                     <article class="information-card info-card-static">
                         <span class="info-tag">PATIENT GUIDE</span>
                         <h3>Panduan Pasien</h3>
                         <p>Informasi yang membantu pasien memahami proses pelayanan di IMN.</p>
-                        <a href="#">Buka Patient Guide →</a>
+                        <a href="guides.html">Buka Patient Guide →</a>
                     </article>
 
                     <article class="information-card info-card-static">
@@ -415,7 +416,7 @@
         </section>
 
         <!-- =========================
-             RUANG KHUSUS: WALL OF APPRECIATION (TESTIMONI PUJIAN PASIEN ANONIM)
+             RUANG KHUSUS: WALL OF APPRECIATION
         ========================== -->
         <section class="section appreciation-section" style="background: var(--off-white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
             <div class="container">
@@ -426,7 +427,6 @@
                 </div>
 
                 <div id="appreciationGrid" class="appreciation-grid reveal" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
-                    <!-- Konten akan dimuat otomatis dari data feedback pujian -->
                     <div style="background: var(--white); padding: 25px; border-radius: var(--radius-md); border: 1px solid var(--border); text-align: center; color: var(--text-light);">
                         <p>Belum ada ulasan pujian yang ditampilkan saat ini.</p>
                     </div>
@@ -453,7 +453,7 @@
 
                     <details>
                         <summary>Layanan apa saja yang tersedia? <span>+</span></summary>
-                        <p>Institut Medika Nusantara menyediakan Poli Umum, Poli Anak, Poli Kandungan, dan Poli Jiwa.</p>
+                        <p>Institut Medika Nusantara menyediakan Poli Umum, Poli Obgyn, Poli Anak, dan Poli Jiwa.</p>
                     </details>
 
                     <details>
@@ -542,9 +542,9 @@
 
                 <div>
                     <h4>Information</h4>
-                    <a href="#information">Patient Guide</a>
+                    <a href="guides.html">Patient Guide</a>
                     <a href="#information">Berita</a>
-                    <a href="#information">Feedback</a>
+                    <a href="feedback.html">Feedback</a>
                     <a href="#contact">Kontak</a>
                 </div>
             </div>
