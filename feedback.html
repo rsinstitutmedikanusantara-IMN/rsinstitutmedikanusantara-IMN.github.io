@@ -67,7 +67,6 @@
             const detail = document.getElementById('messageDetail').value.trim();
             const dateStr = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
 
-            // Jika jenis pesan adalah Pujian, simpan ke LocalStorage untuk Wall of Appreciation
             if (type === 'Pujian / Apresiasi') {
                 const appreciations = JSON.parse(localStorage.getItem('imn_appreciation_data') || '[]');
                 appreciations.unshift({ name, type, category, detail, date: dateStr });
