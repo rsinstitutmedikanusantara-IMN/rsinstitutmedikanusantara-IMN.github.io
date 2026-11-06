@@ -1,5 +1,5 @@
 // ==========================================
-// INSTITUT MEDIKA NUSANTARA - INTERACTIVE JS
+// INSTITUT MEDIKA NUSANTARA - SCRIPT.JS
 // ==========================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -67,17 +67,35 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 4. LOAD DYNAMIC DATA (DOKTER, KONTAK, & WALL OF APPRECIATION)
-    loadDynamicContent();
+    // 4. LOAD DATA DOKTER & KONTAK (PRIORITAS LOCALSTORAGE ADMIN, FALLBACK KE data.json)
+    loadDoctorsAndContact();
 
-    function loadDynamicContent() {
-        // A. LOAD DOKTER DARI ADMIN
+    function loadDoctorsAndContact() {
+        const localDoctors = JSON.parse(localStorage.getItem('imn_doctor_data') || 'null');
+        const localContact = JSON.parse(localStorage.getItem('imn_contact_data') || 'null');
+
+        if (localDoctors && localDoctors.length > 0) {
+            renderDoctorList(localDoctors);
+        } else {
+            fetch('data.json')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.doctors) renderDoctorList(data.doctors);
+                    if (data.contact) renderContact(data.contact);
+                })
+                .catch(err => console.log('Menggunakan data lokal...', err));
+        }
+
+        if (localContact && localContact.address) {
+            renderContact(localContact);
+        }
+    }
+
+    function renderDoctorList(doctors) {
         const docContainer = document.querySelector('.doctor-placeholder');
-        const doctorData = JSON.parse(localStorage.getItem('imn_doctor_data') || '[]');
-
-        if (docContainer && doctorData.length > 0) {
+        if (docContainer && doctors.length > 0) {
             let docHTML = `<div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); text-align: left;">`;
-            doctorData.forEach(doc => {
+            doctors.forEach(doc => {
                 docHTML += `
                     <div class="service-card" style="box-shadow: var(--shadow-sm);">
                         <div class="service-icon">👨‍⚕️</div>
@@ -92,56 +110,53 @@ document.addEventListener('DOMContentLoaded', () => {
             docContainer.style.background = 'transparent';
             docContainer.style.border = 'none';
         }
+    }
 
-        // B. LOAD KONTAK DARI ADMIN
-        const cntData = JSON.parse(localStorage.getItem('imn_contact_data') || '{}');
-        if (cntData.address) {
-            const items = document.querySelectorAll('.contact-item p');
-            if (items.length >= 4) {
-                items[0].textContent = cntData.address;
-                items[1].textContent = cntData.phone;
-                items[2].textContent = cntData.email;
-                items[3].textContent = cntData.hours;
-            }
-        }
-
-        // C. LOAD WALL OF APPRECIATION (PUJIAN PASIEN DENGAN SENSOR NAMA)
-        const appreciationGrid = document.getElementById('appreciationGrid');
-        const appreciations = JSON.parse(localStorage.getItem('imn_appreciation_data') || '[]');
-
-        if (appreciationGrid && appreciations.length > 0) {
-            let appHTML = '';
-            appreciations.forEach(item => {
-                // SENSOR NAMA (Contoh: "Anjelina" menjadi "A*****a")
-                let maskedName = "Pasien Anonim";
-                if (item.name && item.name.length > 2) {
-                    maskedName = item.name.charAt(0) + '*'.repeat(item.name.length - 2) + item.name.slice(-1);
-                } else if (item.name) {
-                    maskedName = item.name.charAt(0) + '*';
-                }
-
-                appHTML += `
-                    <div style="background: var(--white); padding: 25px; border-radius: var(--radius-md); border: 1px solid var(--border); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; justify-content: space-between;">
-                        <div>
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                                <span style="font-size: 0.7rem; font-weight: 700; padding: 4px 10px; background: #e6fffa; color: #319795; border-radius: 999px;">${item.type}</span>
-                                <small style="color: var(--text-light); font-size: 0.72rem;">${item.date}</small>
-                            </div>
-                            <p style="font-weight: 700; color: var(--blue-accent); font-size: 0.82rem; margin-bottom: 8px;">Kategori: ${item.category}</p>
-                            <p style="font-size: 0.9rem; color: var(--text); font-style: italic; line-height: 1.5; margin-bottom: 16px;">"${item.detail}"</p>
-                        </div>
-                        <div style="border-top: 1px solid var(--border); padding-top: 12px; display: flex; justify-content: space-between; align-items: center;">
-                            <strong style="font-size: 0.8rem; color: var(--navy);">${maskedName}</strong>
-                            <span style="font-size: 0.7rem; color: var(--text-light);">Verified Patient</span>
-                        </div>
-                    </div>
-                `;
-            });
-            appreciationGrid.innerHTML = appHTML;
+    function renderContact(contact) {
+        const items = document.querySelectorAll('.contact-item p');
+        if (items.length >= 4) {
+            items[0].textContent = contact.address;
+            items[1].textContent = contact.phone;
+            items[2].textContent = contact.email;
+            items[3].textContent = contact.hours;
         }
     }
 
-    // 5. ANIMASI SCROLL REVEAL ELEGANT
+    // 5. LOAD WALL OF APPRECIATION (PUJIAN PASIEN)
+    const appreciationGrid = document.getElementById('appreciationGrid');
+    const appreciations = JSON.parse(localStorage.getItem('imn_appreciation_data') || '[]');
+
+    if (appreciationGrid && appreciations.length > 0) {
+        let appHTML = '';
+        appreciations.forEach(item => {
+            let maskedName = "Pasien Anonim";
+            if (item.name && item.name.length > 2) {
+                maskedName = item.name.charAt(0) + '*'.repeat(item.name.length - 2) + item.name.slice(-1);
+            } else if (item.name) {
+                maskedName = item.name.charAt(0) + '*';
+            }
+
+            appHTML += `
+                <div style="background: var(--white); padding: 25px; border-radius: var(--radius-md); border: 1px solid var(--border); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <span style="font-size: 0.7rem; font-weight: 700; padding: 4px 10px; background: #e6fffa; color: #319795; border-radius: 999px;">${item.type}</span>
+                            <small style="color: var(--text-light); font-size: 0.72rem;">${item.date}</small>
+                        </div>
+                        <p style="font-weight: 700; color: var(--blue-accent); font-size: 0.82rem; margin-bottom: 8px;">Kategori: ${item.category}</p>
+                        <p style="font-size: 0.9rem; color: var(--text); font-style: italic; line-height: 1.5; margin-bottom: 16px;">"${item.detail}"</p>
+                    </div>
+                    <div style="border-top: 1px solid var(--border); padding-top: 12px; display: flex; justify-content: space-between; align-items: center;">
+                        <strong style="font-size: 0.8rem; color: var(--navy);">${maskedName}</strong>
+                        <span style="font-size: 0.7rem; color: var(--text-light);">Verified Patient</span>
+                    </div>
+                </div>
+            `;
+        });
+        appreciationGrid.innerHTML = appHTML;
+    }
+
+    // 6. ANIMASI SCROLL REVEAL ELEGANT
     const reveals = document.querySelectorAll('.reveal');
     const revealOnScroll = () => {
         const windowHeight = window.innerHeight;
