@@ -8,18 +8,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <style>
-        .feedback-page { min-height: 100vh; display: flex; align-items: center; background: radial-gradient(circle at top right, rgba(49, 130, 206, 0.08), transparent 40%), var(--off-white); padding: 40px 0; }
-        .feedback-card-container { max-width: 650px; margin: 0 auto; background: var(--white); padding: 40px; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); border: 1px solid var(--border); }
-        .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 700; color: var(--blue-accent); margin-bottom: 20px; }
-    </style>
 </head>
 <body>
-
-    <main class="feedback-page">
+    <main class="feedback-page" style="min-height: 100vh; display: flex; align-items: center; padding: 40px 0; background: var(--off-white);">
         <div class="container">
-            <div class="feedback-card-container">
-                <a href="index.html#information" class="back-link">← Kembali ke Beranda</a>
+            <div class="feedback-card-container" style="max-width: 650px; margin: 0 auto; background: var(--white); padding: 40px; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); border: 1px solid var(--border);">
+                <a href="index.html#information" class="back-link" style="display:inline-flex; align-items:center; gap:6px; font-size:0.8rem; font-weight:700; color:var(--blue-accent); margin-bottom:20px;">← Kembali ke Beranda</a>
                 
                 <div class="form-header" style="margin-bottom: 24px;">
                     <span style="font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; color: var(--blue-accent); text-transform: uppercase;">CUSTOMER CARE</span>
@@ -29,22 +23,21 @@
 
                 <form id="feedbackForm">
                     <div class="form-group" style="margin-bottom: 16px;">
-                        <label for="clientName" style="display:block; font-size:0.75rem; font-weight:700; margin-bottom:6px;">Nama Pasien / Pengunjung</label>
+                        <label style="display:block; font-size:0.75rem; font-weight:700; margin-bottom:6px;">Nama Pasien / Pengunjung</label>
                         <input type="text" id="clientName" placeholder="Masukkan nama lengkap" style="width:100%; padding:12px 14px; border:1px solid var(--border); border-radius:8px; background:var(--off-white);" required>
                     </div>
 
                     <div class="form-row" style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-bottom:16px;">
                         <div class="form-group">
-                            <label for="feedbackType" style="display:block; font-size:0.75rem; font-weight:700; margin-bottom:6px;">Jenis Pesan</label>
+                            <label style="display:block; font-size:0.75rem; font-weight:700; margin-bottom:6px;">Jenis Pesan</label>
                             <select id="feedbackType" required style="width:100%; padding:12px 14px; border:1px solid var(--border); border-radius:8px; background:var(--off-white);">
                                 <option value="Pujian / Apresiasi">Pujian / Apresiasi</option>
                                 <option value="Saran / Masukan">Saran / Masukan</option>
                                 <option value="Keluhan / Complaint">Keluhan / Complaint</option>
                             </select>
                         </div>
-
                         <div class="form-group">
-                            <label for="category" style="display:block; font-size:0.75rem; font-weight:700; margin-bottom:6px;">Kategori Layanan</label>
+                            <label style="display:block; font-size:0.75rem; font-weight:700; margin-bottom:6px;">Kategori Layanan</label>
                             <select id="category" required style="width:100%; padding:12px 14px; border:1px solid var(--border); border-radius:8px; background:var(--off-white);">
                                 <option value="Pelayanan Pendaftaran / Adm">Pelayanan Pendaftaran / Adm</option>
                                 <option value="Poli & Tenaga Medis">Poli & Tenaga Medis</option>
@@ -55,13 +48,11 @@
                     </div>
 
                     <div class="form-group" style="margin-bottom: 20px;">
-                        <label for="messageDetail" style="display:block; font-size:0.75rem; font-weight:700; margin-bottom:6px;">Uraian Pengalaman / Pesan</label>
-                        <textarea id="messageDetail" rows="4" placeholder="Ceritakan pengalaman, saran, atau kendala yang Anda alami secara detail..." required style="width:100%; padding:12px 14px; border:1px solid var(--border); border-radius:8px; background:var(--off-white);"></textarea>
+                        <label style="display:block; font-size:0.75rem; font-weight:700; margin-bottom:6px;">Uraian Pengalaman / Pesan</label>
+                        <textarea id="messageDetail" rows="4" placeholder="Ceritakan pengalaman atau masukan Anda..." required style="width:100%; padding:12px 14px; border:1px solid var(--border); border-radius:8px; background:var(--off-white);"></textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">
-                        Kirim ke WhatsApp IMN →
-                    </button>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Kirim ke WhatsApp IMN & Wall of Appreciation →</button>
                 </form>
             </div>
         </div>
@@ -70,21 +61,19 @@
     <script>
         document.getElementById('feedbackForm').addEventListener('submit', function(e) {
             e.preventDefault();
-
             const name = document.getElementById('clientName').value.trim();
             const type = document.getElementById('feedbackType').value;
             const category = document.getElementById('category').value;
             const detail = document.getElementById('messageDetail').value.trim();
             const dateStr = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
 
-            // SIMPAN KE LOCALSTORAGE JIKA JENISNYA PUJIAN/APRESIASI UNTUK DITAMPILKAN DI WALL OF APPRECIATION
+            // Jika jenis pesan adalah Pujian, simpan ke LocalStorage untuk Wall of Appreciation
             if (type === 'Pujian / Apresiasi') {
                 const appreciations = JSON.parse(localStorage.getItem('imn_appreciation_data') || '[]');
                 appreciations.unshift({ name, type, category, detail, date: dateStr });
                 localStorage.setItem('imn_appreciation_data', JSON.stringify(appreciations));
             }
 
-            // KIRIM KE WHATSAPP
             const whatsappNumber = "6289673320727"; 
             const text = `💬 *FEEDBACK & COMPLAINT IMN*\n\n` +
                          `• *Nama*: ${name}\n` +
