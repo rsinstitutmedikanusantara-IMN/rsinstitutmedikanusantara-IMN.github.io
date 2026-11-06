@@ -11,38 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (menuToggle && mainNav) {
         menuToggle.addEventListener('click', () => {
             mainNav.classList.toggle('open');
-            const isOpen = mainNav.classList.contains('open');
-            menuToggle.setAttribute('aria-expanded', isOpen);
-            menuToggle.textContent = isOpen ? '✕' : '☰';
-        });
-
-        mainNav.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mainNav.classList.remove('open');
-                menuToggle.textContent = '☰';
-            });
         });
     }
 
-    // 2. DARK MODE TOGGLE
-    const themeToggle = document.getElementById('themeToggle');
-    const savedTheme = localStorage.getItem('imn_theme');
-    
-    if (savedTheme === 'dark') {
-        document.body.classList.add('dark-mode');
-        if (themeToggle) themeToggle.textContent = '☀';
-    }
-
-    if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            const isDarkMode = document.body.classList.contains('dark-mode');
-            themeToggle.textContent = isDarkMode ? '☀' : '☾';
-            localStorage.setItem('imn_theme', isDarkMode ? 'dark' : 'light');
-        });
-    }
-
-    // 3. APPOINTMENT FORM KE WHATSAPP
+    // 2. APPOINTMENT FORM KE WHATSAPP
     const appointmentForm = document.getElementById('appointmentForm');
     if (appointmentForm) {
         appointmentForm.addEventListener('submit', (e) => {
@@ -67,105 +39,99 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 4. LOAD DATA DOKTER & KONTAK (PRIORITAS LOCALSTORAGE ADMIN, FALLBACK KE data.json)
-    loadDoctorsAndContact();
+    // 3. LOAD BERITA KE TICKER OTOMATIS
+    loadNewsTicker();
 
-    function loadDoctorsAndContact() {
-        const localDoctors = JSON.parse(localStorage.getItem('imn_doctor_data') || 'null');
-        const localContact = JSON.parse(localStorage.getItem('imn_contact_data') || 'null');
+    function loadNewsTicker() {
+        const newsTrack = document.getElementById('newsTrack');
+        if (!newsTrack) return;
 
-        if (localDoctors && localDoctors.length > 0) {
-            renderDoctorList(localDoctors);
+        const newsList = JSON.parse(localStorage.getItem('imn_news_data') || '[]');
+        if (newsList.length > 0) {
+            let newsHTML = '';
+            newsList.forEach(item => {
+                newsHTML += `<span class="news-item" style="margin-right: 40px;">📢 <strong>${item.date || ''}</strong>: ${item.title}</span>`;
+            });
+            newsTrack.innerHTML = newsHTML;
         } else {
             fetch('data.json')
                 .then(res => res.json())
                 .then(data => {
-                    if (data.doctors) renderDoctorList(data.doctors);
-                    if (data.contact) renderContact(data.contact);
+                    if (data.news && data.news.length > 0) {
+                        let newsHTML = '';
+                        data.news.forEach(item => {
+                            newsHTML += `<span class="news-item" style="margin-right: 40px;">📢 ${item.title}</span>`;
+                        });
+                        newsTrack.innerHTML = newsHTML;
+                    }
                 })
-                .catch(err => console.log('Menggunakan data lokal...', err));
-        }
-
-        if (localContact && localContact.address) {
-            renderContact(localContact);
+                .catch(() => {});
         }
     }
 
-    function renderDoctorList(doctors) {
+    // 4. LOAD DATA DOKTER
+    loadDoctors();
+
+    function loadDoctors() {
         const docContainer = document.querySelector('.doctor-placeholder');
-        if (docContainer && doctors.length > 0) {
-            let docHTML = `<div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); text-align: left;">`;
-            doctors.forEach(doc => {
-                docHTML += `
-                    <div class="service-card" style="box-shadow: var(--shadow-sm);">
-                        <div class="service-icon">👨‍⚕️</div>
-                        <h3>${doc.name}</h3>
-                        <p style="color: var(--blue-accent); font-weight:700; margin-bottom:4px;">${doc.spec}</p>
-                        <small style="color: var(--text-light);">${doc.sched}</small>
-                    </div>
-                `;
-            });
-            docHTML += `</div>`;
-            docContainer.innerHTML = docHTML;
-            docContainer.style.background = 'transparent';
-            docContainer.style.border = 'none';
+        if (!docContainer) return;
+
+        const localDoctors = JSON.parse(localStorage.getItem('imn_doctor_data') || 'null');
+        if (localDoctors && localDoctors.length > 0) {
+            renderDoctors(localDoctors);
+        } else {
+            fetch('data.json')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.doctors) renderDoctors(data.doctors);
+                })
+                .catch(() => {
+                    docContainer.innerHTML = `<p style="color:var(--text-light);">Belum ada jadwal dokter yang dikonfigurasi.</p>`;
+                });
         }
     }
 
-    function renderContact(contact) {
-        const items = document.querySelectorAll('.contact-item p');
-        if (items.length >= 4) {
-            items[0].textContent = contact.address;
-            items[1].textContent = contact.phone;
-            items[2].textContent = contact.email;
-            items[3].textContent = contact.hours;
-        }
-    }
+    function renderDoctors(doctors) {
+        const docContainer = document.querySelector('.doctor-placeholder');
+        if (!docContainer) return;
 
-    // 5. LOAD WALL OF APPRECIATION (PUJIAN PASIEN)
-    const appreciationGrid = document.getElementById('appreciationGrid');
-    const appreciations = JSON.parse(localStorage.getItem('imn_appreciation_data') || '[]');
-
-    if (appreciationGrid && appreciations.length > 0) {
-        let appHTML = '';
-        appreciations.forEach(item => {
-            let maskedName = "Pasien Anonim";
-            if (item.name && item.name.length > 2) {
-                maskedName = item.name.charAt(0) + '*'.repeat(item.name.length - 2) + item.name.slice(-1);
-            } else if (item.name) {
-                maskedName = item.name.charAt(0) + '*';
-            }
-
-            appHTML += `
-                <div style="background: var(--white); padding: 25px; border-radius: var(--radius-md); border: 1px solid var(--border); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; justify-content: space-between;">
-                    <div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                            <span style="font-size: 0.7rem; font-weight: 700; padding: 4px 10px; background: #e6fffa; color: #319795; border-radius: 999px;">${item.type}</span>
-                            <small style="color: var(--text-light); font-size: 0.72rem;">${item.date}</small>
-                        </div>
-                        <p style="font-weight: 700; color: var(--blue-accent); font-size: 0.82rem; margin-bottom: 8px;">Kategori: ${item.category}</p>
-                        <p style="font-size: 0.9rem; color: var(--text); font-style: italic; line-height: 1.5; margin-bottom: 16px;">"${item.detail}"</p>
-                    </div>
-                    <div style="border-top: 1px solid var(--border); padding-top: 12px; display: flex; justify-content: space-between; align-items: center;">
-                        <strong style="font-size: 0.8rem; color: var(--navy);">${maskedName}</strong>
-                        <span style="font-size: 0.7rem; color: var(--text-light);">Verified Patient</span>
-                    </div>
+        let html = `<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:16px; text-align:left;">`;
+        doctors.forEach(doc => {
+            html += `
+                <div style="background:var(--white); padding:20px; border-radius:12px; border:1px solid var(--border); box-shadow:var(--shadow-sm);">
+                    <div style="font-size:1.2rem; margin-bottom:6px;">👨‍⚕️</div>
+                    <strong style="color:var(--navy-dark); display:block;">${doc.name}</strong>
+                    <span style="color:var(--blue-accent); font-size:0.8rem; font-weight:700;">${doc.spec}</span><br>
+                    <small style="color:var(--text-light); font-size:0.75rem;">${doc.sched}</small>
                 </div>
             `;
         });
-        appreciationGrid.innerHTML = appHTML;
+        html += `</div>`;
+        docContainer.innerHTML = html;
+        docContainer.style.background = 'transparent';
+        docContainer.style.border = 'none';
     }
 
-    // 6. ANIMASI SCROLL REVEAL ELEGANT
+    // 5. ANIMASI SCROLL DUAL-DIRECTION (NAIK & TURUN)
+    let lastScrollTop = 0;
     const reveals = document.querySelectorAll('.reveal');
-    const revealOnScroll = () => {
+
+    window.addEventListener('scroll', () => {
+        let st = window.pageYOffset || document.documentElement.scrollTop;
+        let isScrollingDown = st > lastScrollTop;
+        lastScrollTop = st <= 0 ? 0 : st;
+
         const windowHeight = window.innerHeight;
+
         reveals.forEach(reveal => {
-            if (reveal.getBoundingClientRect().top < windowHeight - 100) {
-                reveal.classList.add('active');
+            const elementTop = reveal.getBoundingClientRect().top;
+
+            if (elementTop < windowHeight - 80 && elementTop > -100) {
+                reveal.classList.add('active-up');
+                reveal.classList.remove('active-down');
+            } else if (!isScrollingDown && elementTop >= windowHeight - 80) {
+                reveal.classList.remove('active-up');
             }
         });
-    };
-    window.addEventListener('scroll', revealOnScroll);
-    revealOnScroll();
+    });
 });
