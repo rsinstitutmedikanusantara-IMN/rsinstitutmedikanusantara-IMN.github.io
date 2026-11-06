@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div style="background: var(--white); padding: 25px; border-radius: var(--radius-md); border: 1px solid var(--border); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; justify-content: space-between;">
                         <div>
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                                <span style="font-size: 0.7rem; font-weight: 700; padding: 4px 10px; background: var(--green-light); color: var(--green); border-radius: 999px;">${item.type}</span>
+                                <span style="font-size: 0.7rem; font-weight: 700; padding: 4px 10px; background: #e6fffa; color: #319795; border-radius: 999px;">${item.type}</span>
                                 <small style="color: var(--text-light); font-size: 0.72rem;">${item.date}</small>
                             </div>
                             <p style="font-weight: 700; color: var(--blue-accent); font-size: 0.82rem; margin-bottom: 8px;">Kategori: ${item.category}</p>
