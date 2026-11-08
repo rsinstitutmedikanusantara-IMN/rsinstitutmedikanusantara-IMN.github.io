@@ -22,22 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 2. DARK MODE TOGGLE
-    const themeToggle = document.getElementById('themeToggle');
-    if (themeToggle) {
-        if (localStorage.getItem('imn_theme') === 'dark') {
-            document.body.classList.add('dark-mode');
-            themeToggle.textContent = '☀';
-        }
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            const isDark = document.body.classList.contains('dark-mode');
-            themeToggle.textContent = isDark ? '☀' : '☾';
-            localStorage.setItem('imn_theme', isDark ? 'dark' : 'light');
-        });
-    }
-
-    // 3. APPOINTMENT FORM KE WHATSAPP
+    // 2. APPOINTMENT FORM KE WHATSAPP
     const appointmentForm = document.getElementById('appointmentForm');
     if (appointmentForm) {
         appointmentForm.addEventListener('submit', (e) => {
@@ -61,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     window.location.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
                     appointmentForm.reset();
                 } catch (error) {
-                    alert('Maaf, pengiriman janji temu gagal diproses. Silakan coba kembali.');
+                    alert('Maaf, pengiriman janji temu gagal diproses.');
                 }
             } else {
                 alert('Mohon lengkapi data formulir janji temu dengan benar.');
@@ -69,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 4. LOAD PAPAN APRESIASI DI BERANDA
+    // 3. LOAD PAPAN APRESIASI DI BERANDA
     const appreciationGrid = document.getElementById('appreciationGrid');
     if (appreciationGrid) {
         const appreciations = JSON.parse(localStorage.getItem('imn_appreciation_data') || '[]');
@@ -104,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 5. LOAD BERITA TICKER
+    // 4. LOAD BERITA TICKER
     const newsTrack = document.getElementById('newsTrack');
     if (newsTrack) {
         const newsList = JSON.parse(localStorage.getItem('imn_news_data') || '[]');
@@ -114,10 +99,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 newsHTML += `<span class="news-item" style="margin-right: 40px;">📢 <strong>${item.date || ''}</strong>: ${item.title}</span>`;
             });
             newsTrack.innerHTML = newsHTML;
+        } else {
+            fetch('data.json')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.news && data.news.length > 0) {
+                        let newsHTML = '';
+                        data.news.forEach(item => {
+                            newsHTML += `<span class="news-item" style="margin-right: 40px;">📢 ${item.title}</span>`;
+                        });
+                        newsTrack.innerHTML = newsHTML;
+                    }
+                })
+                .catch(() => {});
         }
     }
 
-    // 6. LOAD DOKTER
+    // 5. LOAD DOKTER
     const docContainer = document.querySelector('.doctor-placeholder');
     if (docContainer) {
         const localDoctors = JSON.parse(localStorage.getItem('imn_doctor_data') || 'null');
@@ -153,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
         docContainer.style.border = 'none';
     }
 
-    // 7. ANIMASI SCROLL DUAL-DIRECTION
+    // 6. ANIMASI SCROLL DUAL-DIRECTION
     let lastScrollTop = 0;
     const reveals = document.querySelectorAll('.reveal');
 
