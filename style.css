@@ -1,5 +1,5 @@
 /* =========================================================
-   INSTITUT MEDIKA NUSANTARA - PERFECT MOBILE RESPONSIVE CSS
+   INSTITUT MEDIKA NUSANTARA - FINAL POLISHED CSS
 ========================================================= */
 
 :root {
@@ -45,7 +45,7 @@ html, body {
     padding: 0 20px;
 }
 
-/* LOGO & BRAND */
+/* LOGO ASLI (imn-logo.png) */
 .brand {
     display: flex;
     align-items: center;
@@ -53,10 +53,11 @@ html, body {
     text-decoration: none;
 }
 
-.brand-logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.brand-img-logo {
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+    border-radius: 6px;
 }
 
 .brand-name {
@@ -369,12 +370,12 @@ html, body {
 /* FOOTER */
 .site-footer { background: var(--white); padding: 24px 0; border-top: 1px solid var(--border); text-align: center; font-size: 0.85rem; color: var(--text-light); }
 
-/* ANIMASI REVEAL */
+/* ANIMASI */
 .reveal { opacity: 0; transform: translateY(30px); transition: all 0.5s ease-out; }
 .reveal.active-up { opacity: 1; transform: translateY(0); }
 .reveal.active-down { opacity: 0; transform: translateY(-30px); }
 
-/* PERBAIKAN TAMPILAN PONSEL DENGAN SANGAT PRESISI */
+/* RESPONSIVE PONSEL */
 @media (max-width: 768px) {
     .container { padding: 0 16px; }
     
@@ -386,9 +387,7 @@ html, body {
     .hero-content h1 { font-size: 1.9rem; }
     .hero-image-wrapper { height: 240px; }
     .services-grid { grid-template-columns: 1fr; }
-    
     .form-row { grid-template-columns: 1fr; }
-    
     .appointment-form { padding: 20px 16px; }
     
     .contact-details { gap: 14px; }
