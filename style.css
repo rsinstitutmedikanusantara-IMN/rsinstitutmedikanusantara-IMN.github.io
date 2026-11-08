@@ -1,5 +1,5 @@
 /* =========================================================
-   INSTITUT MEDIKA NUSANTARA - LUXURY PALETTE (STYLE.CSS)
+   INSTITUT MEDIKA NUSANTARA - LUXURY & RESPONSIVE STYLE.CSS
 ========================================================= */
 
 :root {
@@ -7,7 +7,7 @@
     --sapphire: #3B507D;     /* Sapphire */
     --warm-taupe: #BEB7A7;   /* Warm Taupe */
     --champagne: #E7E2CE;    /* Champagne */
-    --ivory: #F5F4F0;        /* Ivory (Background Utama) */
+    --ivory: #F5F4F0;        /* Ivory Background */
     
     --white: #ffffff;
     --text: #112250;
@@ -19,18 +19,6 @@
     --radius-sm: 8px;
     --radius-md: 12px;
     --radius-lg: 20px;
-}
-
-body.dark-mode {
-    --navy-dark: #080f22;
-    --sapphire: #112250;
-    --warm-taupe: #333d52;
-    --champagne: #1e293b;
-    --ivory: #0d1527;
-    --white: #162238;
-    --text: #F5F4F0;
-    --text-light: #BEB7A7;
-    --border: #3B507D;
 }
 
 * {
@@ -124,8 +112,6 @@ body {
     font-size: 1.2rem;
     color: var(--navy-dark);
 }
-
-body.dark-mode .brand-name { color: var(--white); }
 
 .brand-fullname {
     font-size: 0.65rem;
@@ -252,7 +238,6 @@ body.dark-mode .brand-name { color: var(--white); }
     margin-bottom: 16px;
 }
 
-body.dark-mode .hero-content h1 { color: var(--white); }
 .highlight-text { color: var(--sapphire); }
 
 .hero-description {
@@ -261,7 +246,7 @@ body.dark-mode .hero-content h1 { color: var(--white); }
     margin-bottom: 24px;
 }
 
-.hero-actions { display: flex; gap: 12px; margin-bottom: 30px; }
+.hero-actions { display: flex; gap: 12px; margin-bottom: 30px; flex-wrap: wrap; }
 .hero-trust { display: flex; gap: 24px; }
 .trust-item { display: flex; align-items: center; gap: 10px; }
 .trust-check {
@@ -328,7 +313,9 @@ body.dark-mode .hero-content h1 { color: var(--white); }
     border-radius: var(--radius-md);
     border: 1px solid var(--warm-taupe);
     box-shadow: var(--shadow-sm);
+    transition: transform 0.3s ease;
 }
+.service-card:hover { transform: translateY(-5px); }
 .service-icon { font-size: 1.5rem; margin-bottom: 12px; }
 
 /* APPOINTMENT FORM */
@@ -342,12 +329,8 @@ body.dark-mode .hero-content h1 { color: var(--white); }
     border: 1px solid var(--warm-taupe);
 }
 
-body.dark-mode .appointment-form { background: var(--navy); color: var(--white); }
-
 .form-group { margin-bottom: 14px; }
 .form-group label { display: block; font-size: 0.75rem; font-weight: 700; margin-bottom: 4px; color: var(--navy-dark); }
-body.dark-mode .form-group label { color: var(--champagne); }
-
 .form-group input, .form-group select, .form-group textarea {
     width: 100%;
     padding: 10px 12px;
@@ -360,47 +343,20 @@ body.dark-mode .form-group label { color: var(--champagne); }
 
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
-/* MODAL APRESIASI */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(17, 34, 80, 0.85);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    padding: 20px;
-}
-
-.modal-card {
-    background: var(--ivory);
-    max-width: 480px;
-    width: 100%;
-    padding: 30px;
-    border-radius: var(--radius-lg);
-    text-align: center;
-    box-shadow: var(--shadow-lg);
-    border: 1px solid var(--warm-taupe);
-}
-
-.modal-icon { font-size: 2.5rem; margin-bottom: 10px; }
-
 /* ANIMASI DUAL-DIRECTION */
 .reveal { opacity: 0; transform: translateY(40px); transition: all 0.6s ease-out; }
 .reveal.active-up { opacity: 1; transform: translateY(0); }
 .reveal.active-down { opacity: 0; transform: translateY(-40px); }
 
-/* RESPONSIVE HP */
+/* RESPONSIVE HP (SANGAT RAPI) */
 @media (max-width: 768px) {
     .hero-container, .appointment-container, .contact-container {
         grid-template-columns: 1fr;
         gap: 30px;
     }
-    .hero-content h1 { font-size: 2rem; }
-    .services-grid { grid-template-columns: 1fr 1fr; }
+    .hero-content h1 { font-size: 2.1rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .floating-card { display: none; }
     
     .main-nav {
         display: none;
@@ -414,6 +370,7 @@ body.dark-mode .form-group label { color: var(--champagne); }
         box-shadow: var(--shadow-lg);
         border-bottom: 1px solid var(--border);
         gap: 15px;
+        align-items: flex-start;
     }
     .main-nav.open { display: flex; }
     .menu-toggle { display: block; }
