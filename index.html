@@ -20,10 +20,13 @@
         </div>
     </div>
 
-    <!-- HEADER & NAVIGASI (ADMIN DIHILANGKAN DARI MENU) -->
+    <!-- HEADER & NAVIGASI (LOGO DIKEMBALIKAN) -->
     <header class="site-header">
         <div class="container nav-container">
             <a href="index.html" class="brand">
+                <div class="brand-logo">
+                    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#3B507D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/><path d="m4.93 4.93 14.14 14.14"/><path d="m4.93 19.07 14.14-14.14"/></svg>
+                </div>
                 <div class="brand-text">
                     <span class="brand-name">IMN</span>
                     <span class="brand-fullname">Institut Medika Nusantara</span>
@@ -90,13 +93,9 @@
                 </div>
             </div>
 
-            <div class="hero-visual reveal" style="position: relative;">
+            <div class="hero-visual reveal">
                 <div class="hero-image-wrapper">
                     <img src="https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?q=80&w=1000&auto=format&fit=crop" alt="Bangunan Rumah Sakit Modern" class="hero-image">
-                </div>
-                <div class="floating-card">
-                    <div class="status-dot"></div>
-                    <div><strong>Layanan 24/7</strong><small>Siap Melayani Pasien</small></div>
                 </div>
             </div>
         </div>
@@ -105,9 +104,9 @@
     <!-- LAYANAN & POLIKLINIK -->
     <section id="services" class="section">
         <div class="container">
-            <div class="section-heading centered reveal" style="text-align: center; margin-bottom: 40px;">
-                <span class="section-label" style="color:var(--sapphire); font-weight:700; font-size:0.75rem; text-transform:uppercase;">MEDICAL CARE</span>
-                <h2 style="font-family:'Playfair Display',serif; font-size:2.2rem; margin-top:6px;">Layanan Poliklinik <span style="color:var(--sapphire);">Spesialis</span></h2>
+            <div class="section-heading centered reveal">
+                <span class="section-label">MEDICAL CARE</span>
+                <h2>Layanan Poliklinik <span>Spesialis</span></h2>
             </div>
 
             <div class="services-grid reveal">
@@ -117,26 +116,26 @@
                 <div class="service-card"><div class="service-icon">🧠</div><h3>Poli Jiwa</h3><p>Konsultasi kesehatan mental dan konseling profesional.</p></div>
             </div>
 
-            <div class="doctor-section reveal" style="margin-top: 50px;">
-                <h3 style="text-align: center; margin-bottom: 20px; font-family:'Playfair Display', serif;">Jadwal Dokter Spesialis</h3>
+            <div class="doctor-section reveal">
+                <h3>Jadwal Dokter Spesialis</h3>
                 <div class="doctor-placeholder"><p>Memuat data dokter...</p></div>
             </div>
         </div>
     </section>
 
     <!-- PAPAN APRESIASI -->
-    <section class="section" style="background: var(--white);">
+    <section class="section appreciation-section">
         <div class="container">
-            <div class="section-heading centered reveal" style="text-align: center; margin-bottom: 40px;">
-                <span class="section-label" style="color:var(--sapphire); font-weight:700; font-size:0.75rem; text-transform:uppercase;">WALL OF APPRECIATION</span>
-                <h2 style="font-family:'Playfair Display',serif; font-size:2.2rem; margin-top:6px;">Pujian & Apresiasi <span style="color:var(--sapphire);">Pasien</span></h2>
-                <p style="color: var(--text-light); font-size: 0.9rem;">Ungkapan tulus dan pengalaman positif dari pasien yang telah dilayani oleh IMN.</p>
+            <div class="section-heading centered reveal">
+                <span class="section-label">WALL OF APPRECIATION</span>
+                <h2>Pujian & Apresiasi <span>Pasien</span></h2>
+                <p class="section-sub">Ungkapan tulus dan pengalaman positif dari pasien yang telah dilayani oleh IMN.</p>
             </div>
-            <div id="appreciationGrid" class="reveal" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
-                <div style="background: var(--ivory); padding: 25px; border-radius: var(--radius-md); border: 1px solid var(--warm-taupe);">
-                    <small style="color: var(--sapphire); font-weight: 700;">Contoh Apresiasi</small>
-                    <p style="font-size: 0.9rem; color: var(--text); font-style: italic; margin: 12px 0;">"Pelayanan sangat ramah, profesional, dan membantu sekali dalam konsultasi kesehatan."</p>
-                    <strong style="font-size: 0.8rem; color: var(--navy-dark);">— Pasien IMN</strong>
+            <div id="appreciationGrid" class="reveal appreciation-grid">
+                <div class="appreciation-card">
+                    <small class="appreciation-tag">Contoh Apresiasi</small>
+                    <p class="appreciation-text">"Pelayanan sangat ramah, profesional, dan membantu sekali dalam konsultasi kesehatan."</p>
+                    <strong class="appreciation-author">— Pasien IMN</strong>
                 </div>
             </div>
         </div>
@@ -146,9 +145,9 @@
     <section id="appointment" class="section appointment-section">
         <div class="container appointment-container">
             <div class="appointment-intro reveal">
-                <span style="color:var(--champagne); font-weight:700; font-size:0.75rem; text-transform:uppercase;">ONLINE BOOKING</span>
-                <h2 style="font-family:'Playfair Display',serif; font-size:2.2rem; margin:10px 0;">Buat Janji Temu <span style="color:var(--champagne);">Mudah & Cepat</span></h2>
-                <p style="color:#BEB7A7; font-size:0.9rem;">Ajukan permohonan konsultasi dengan mengisi formulir. Tim medis akan segera mengonfirmasi jadwal Anda.</p>
+                <span class="section-label light">ONLINE BOOKING</span>
+                <h2>Buat Janji Temu <span>Mudah & Cepat</span></h2>
+                <p>Ajukan permohonan konsultasi dengan mengisi formulir. Tim medis akan segera mengonfirmasi jadwal Anda.</p>
             </div>
 
             <div class="appointment-form reveal">
@@ -176,45 +175,45 @@
                         <label>Catatan Keluhan (Opsional)</label>
                         <textarea id="message" rows="3" placeholder="Tuliskan keluhan singkat..."></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="width:100%; margin-top:10px;">Kirim Permohonan via WhatsApp →</button>
+                    <button type="submit" class="btn btn-primary btn-full">Kirim Permohonan via WhatsApp →</button>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- BAGIAN KONTAK & JAM OPERASIONAL -->
-    <section id="contact" class="contact-section" style="background: var(--navy-dark); color: var(--white); padding: 60px 0;">
-        <div class="container contact-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
-            <div>
-                <span style="color: var(--champagne); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">GET IN TOUCH</span>
-                <h2 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-top: 6px; margin-bottom: 15px;">Hubungi <span style="color: var(--champagne);">IMN</span></h2>
-                <p style="color: var(--warm-taupe); font-size: 0.9rem;">Kami siap menjawab pertanyaan, masukan, serta membantu kebutuhan informasi kesehatan Anda.</p>
+    <!-- KONTAK & JAM OPERASIONAL -->
+    <section id="contact" class="contact-section">
+        <div class="container contact-container">
+            <div class="contact-info">
+                <span class="section-label light">GET IN TOUCH</span>
+                <h2>Hubungi <span>IMN</span></h2>
+                <p>Kami siap menjawab pertanyaan, masukan, serta membantu kebutuhan informasi kesehatan Anda.</p>
             </div>
-            <div class="contact-details" style="display: flex; flex-direction: column; gap: 16px;">
+            <div class="contact-details">
                 <div class="contact-item">
-                    <small style="color: var(--warm-taupe); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em;">ALAMAT</small>
-                    <p style="color: var(--white); font-weight: 600; font-size: 0.9rem;">No. 88, Central Healthcare District.</p>
+                    <small>ALAMAT</small>
+                    <p>No. 88, Central Healthcare District.</p>
                 </div>
                 <div class="contact-item">
-                    <small style="color: var(--warm-taupe); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em;">TELEPON / WHATSAPP</small>
-                    <p style="color: var(--white); font-weight: 600; font-size: 0.9rem;">+62 896-7332-0727</p>
+                    <small>TELEPON / WHATSAPP</small>
+                    <p>+62 896-7332-0727</p>
                 </div>
                 <div class="contact-item">
-                    <small style="color: var(--warm-taupe); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em;">JAM OPERASIONAL</small>
-                    <p style="color: var(--white); font-weight: 600; font-size: 0.9rem;">Senin – Sabtu | 08.00 – 20.00 WIB (Layanan Darurat 24/7)</p>
+                    <small>JAM OPERASIONAL</small>
+                    <p>Senin – Sabtu | 08.00 – 20.00 WIB<br><span style="color:var(--champagne); font-size:0.8rem;">(Layanan Darurat 24/7)</span></p>
                 </div>
                 <div class="contact-item">
-                    <small style="color: var(--warm-taupe); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em;">EMAIL</small>
-                    <p style="color: var(--white); font-weight: 600; font-size: 0.9rem;">rsinstitutmedikanusantara@gmail.com</p>
+                    <small>EMAIL</small>
+                    <p class="email-text">rsinstitutmedikanusantara@gmail.com</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="site-footer" style="background:var(--white); padding:30px 0; border-top:1px solid var(--border); text-align:center;">
+    <footer class="site-footer">
         <div class="container">
-            <p style="color:var(--text-light); font-size:0.85rem;">© 2026 Institut Medika Nusantara. All Rights Reserved.</p>
+            <p>© 2026 Institut Medika Nusantara. All Rights Reserved.</p>
         </div>
     </footer>
 
