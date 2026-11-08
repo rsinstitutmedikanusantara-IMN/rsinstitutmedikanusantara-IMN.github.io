@@ -13,19 +13,19 @@
 
     <header class="page-header" style="background: var(--navy-dark); color: var(--white); padding: 60px 0; text-align: center;">
         <div class="container">
-            <span style="font-size:0.7rem; font-weight:700; color:var(--blue-accent); text-transform:uppercase; letter-spacing:0.1em;">PENGUMUMAN & INFORMASI</span>
+            <span style="font-size:0.7rem; font-weight:700; color:var(--champagne); text-transform:uppercase; letter-spacing:0.1em;">PENGUMUMAN & INFORMASI</span>
             <h1 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--white); margin-top:6px;">Arsip Berita Resmi IMN</h1>
-            <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 8px;">Semua publikasi, informasi layanan, dan perkembangan terbaru seputar Institut Medika Nusantara.</p>
+            <p style="color: var(--warm-taupe); font-size: 0.9rem; margin-top: 8px;">Semua publikasi, informasi layanan, dan perkembangan terbaru seputar Institut Medika Nusantara.</p>
         </div>
     </header>
 
     <main class="section" style="padding: 50px 0;">
         <div class="container" style="max-width: 800px;">
-            <a href="index.html" class="text-link" style="margin-bottom: 24px; display: inline-block;">← Kembali ke Beranda</a>
+            <a href="index.html" class="text-link" style="margin-bottom: 24px; display: inline-block; font-weight:700; color:var(--sapphire);">← Kembali ke Beranda</a>
 
             <div id="allNewsContainer" style="display: flex; flex-direction: column; gap: 16px;">
-                <div style="background: var(--white); padding: 25px; border-radius: var(--radius-md); border: 1px solid var(--border);">
-                    <small style="color: var(--blue-accent); font-weight: 700;">04 November 2026</small>
+                <div style="background: var(--white); padding: 25px; border-radius: var(--radius-md); border: 1px solid var(--warm-taupe); box-shadow: var(--shadow-sm);">
+                    <small style="color: var(--sapphire); font-weight: 700;">📅 04 November 2026</small>
                     <h3 style="font-family:'Playfair Display',serif; color:var(--navy-dark); font-size:1.2rem; margin: 6px 0;">Pendirian Resmi Institut Medika Nusantara</h3>
                     <p style="color: var(--text-light); font-size: 0.9rem;">Institut Medika Nusantara secara resmi didirikan oleh Mrs. S dan Ms. F sebagai institusi kesehatan virtual yang profesional dan terpercaya.</p>
                 </div>
@@ -33,9 +33,9 @@
         </div>
     </main>
 
-    <footer class="site-footer">
-        <div class="container footer-bottom" style="text-align: center; justify-content: center;">
-            <p>© 2026 Institut Medika Nusantara. All Rights Reserved.</p>
+    <footer class="site-footer" style="background:var(--white); padding:30px 0; border-top:1px solid var(--border); text-align:center;">
+        <div class="container">
+            <p style="color:var(--text-light); font-size:0.85rem;">© 2026 Institut Medika Nusantara. All Rights Reserved.</p>
         </div>
     </footer>
 
@@ -48,14 +48,33 @@
                 let html = '';
                 newsList.forEach(item => {
                     html += `
-                        <div style="background: var(--white); padding: 25px; border-radius: var(--radius-md); border: 1px solid var(--border); box-shadow: var(--shadow-sm);">
-                            <small style="color: var(--blue-accent); font-weight: 700;">📅 ${item.date || 'Terbaru'}</small>
+                        <div style="background: var(--white); padding: 25px; border-radius: var(--radius-md); border: 1px solid var(--warm-taupe); box-shadow: var(--shadow-sm);">
+                            <small style="color: var(--sapphire); font-weight: 700;">📅 ${item.date || 'Terbaru'}</small>
                             <h3 style="font-family:'Playfair Display',serif; color:var(--navy-dark); font-size:1.2rem; margin: 6px 0;">${item.title}</h3>
-                            <p style="color: var(--text-light); font-size: 0.9rem;">Informasi resmi yang dipublikasikan melalui Portal Admin Institut Medika Nusantara.</p>
+                            <p style="color: var(--text-light); font-size: 0.9rem;">Informasi resmi dan pengumuman terbaru yang dipublikasikan melalui Portal Admin Institut Medika Nusantara.</p>
                         </div>
                     `;
                 });
                 container.innerHTML = html;
+            } else {
+                // Coba ambil dari data.json jika localstorage kosong
+                fetch('data.json')
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.news && data.news.length > 0) {
+                            let html = '';
+                            data.news.forEach(item => {
+                                html += `
+                                    <div style="background: var(--white); padding: 25px; border-radius: var(--radius-md); border: 1px solid var(--warm-taupe); box-shadow: var(--shadow-sm);">
+                                        <h3 style="font-family:'Playfair Display',serif; color:var(--navy-dark); font-size:1.2rem; margin: 6px 0;">${item.title}</h3>
+                                        <p style="color: var(--text-light); font-size: 0.9rem;">Informasi resmi Institut Medika Nusantara.</p>
+                                    </div>
+                                `;
+                            });
+                            container.innerHTML = html;
+                        }
+                    })
+                    .catch(() => {});
             }
         });
     </script>
